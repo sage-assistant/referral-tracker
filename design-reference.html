@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Serene | Referral Editorial</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@200;300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "serene-bg": "#0f1115",
+              "serene-slate": "#1e2229",
+              "serene-ochre": "#d4a373",
+              "serene-sage": "#93a8ac",
+              "serene-text": "#d1d5db",
+              "serene-muted": "#6b7280",
+              "serene-border": "#2d343f",
+            },
+            fontFamily: {
+              serif: ["Playfair Display", "serif"],
+              sans: ["Plus Jakarta Sans", "sans-serif"],
+            },
+          },
+        },
+      }
+    </script>
+<style type="text/tailwindcss">
+      body {
+        background-color: theme('colors.serene-bg');
+        color: theme('colors.serene-text');
+        font-family: theme('fontFamily.sans');
+        letter-spacing: -0.01em;
+      }
+      .heading-serif {
+        font-family: theme('fontFamily.serif');
+      }
+      .border-subtle {
+        border-color: theme('colors.serene-border');
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 20;
+      }
+      .list-row {
+        @apply flex items-center py-8 border-b border-serene-border hover:bg-white/[0.02] transition-colors px-4 -mx-4 rounded-lg;
+      }
+    </style>
+</head>
+<body class="antialiased">
+<aside class="fixed left-0 top-0 h-full w-20 flex flex-col items-center py-10 border-r border-serene-border z-50">
+<div class="mb-12">
+<div class="w-10 h-10 border border-serene-ochre flex items-center justify-center rounded-full">
+<span class="text-serene-ochre font-serif text-xl italic">S</span>
+</div>
+</div>
+<nav class="flex flex-col gap-10">
+<a class="text-serene-ochre" href="#"><span class="material-symbols-outlined !text-3xl">grid_view</span></a>
+<a class="text-serene-muted hover:text-serene-text" href="#"><span class="material-symbols-outlined !text-3xl">contacts</span></a>
+<a class="text-serene-muted hover:text-serene-text" href="#"><span class="material-symbols-outlined !text-3xl">account_balance</span></a>
+<a class="text-serene-muted hover:text-serene-text" href="#"><span class="material-symbols-outlined !text-3xl">settings</span></a>
+</nav>
+<div class="mt-auto">
+<img alt="Profile" class="w-8 h-8 rounded-full grayscale hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxKKVsUXOFXu6JzbgBOmOl4ByeWAgNhsWGsrLdMIAF4S9FoELtEKs-vEFqA_RSFRHyVwtIRmtglIh51RKxtkFiT9s3HhVDYMQxZqag8xeowGrTegOdalof7O50PoWA8Wv_Y2M5DsUUliyxexWKHTI8we_DZfsgeRJh1zF5584ccC8Y5U7b9_2MKWLFvMqKOFxWnwt5AhfxKghY6DnMSSrzVU8Fs6OtAp_vjhzFHmhHVgDHKM-aesEXpgSFUxZrJDbqQOUqWpb3Jk4"/>
+</div>
+</aside>
+<main class="ml-20 max-w-7xl mx-auto px-12 pt-20 pb-32">
+<header class="mb-24 flex flex-col md:flex-row justify-between items-end">
+<div class="max-w-2xl">
+<h1 class="text-6xl font-serif italic mb-6 text-white tracking-tight">Referral Performance</h1>
+<p class="text-lg text-serene-muted font-light leading-relaxed">
+                A refined observation of your ecosystem's evolution, capturing the organic growth of multi-tier network commissions.
+            </p>
+</div>
+<div class="mt-8 md:mt-0">
+<button class="border border-serene-border px-8 py-3 text-sm tracking-widest uppercase text-serene-text hover:border-serene-ochre hover:text-serene-ochre transition-all">
+                Add New Client
+            </button>
+</div>
+</header>
+<section class="border-y border-serene-border py-10 mb-24">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="flex flex-col gap-2">
+<span class="text-[10px] uppercase tracking-[0.2em] text-serene-sage">Total Setups</span>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-serif text-white">12</span>
+<span class="text-xs text-serene-ochre italic">+8% growth</span>
+</div>
+</div>
+<div class="flex flex-col gap-2 border-l border-serene-border/30 pl-8">
+<span class="text-[10px] uppercase tracking-[0.2em] text-serene-sage">Gross Revenue</span>
+<span class="text-4xl font-serif text-white">$69,000</span>
+</div>
+<div class="flex flex-col gap-2 border-l border-serene-border/30 pl-8">
+<span class="text-[10px] uppercase tracking-[0.2em] text-serene-sage">Outstanding Fees</span>
+<span class="text-4xl font-serif text-white">$11,500</span>
+</div>
+<div class="flex flex-col gap-2 border-l border-serene-border/30 pl-8">
+<span class="text-[10px] uppercase tracking-[0.2em] text-serene-sage">Paid Distributions</span>
+<span class="text-4xl font-serif text-white">$7,200</span>
+</div>
+</div>
+</section>
+<section>
+<div class="flex justify-between items-center mb-10">
+<h2 class="text-2xl font-serif text-white">Active Engagements</h2>
+<div class="flex gap-6 text-[10px] uppercase tracking-widest text-serene-muted font-bold">
+<button class="hover:text-serene-ochre">Filter Views</button>
+<button class="hover:text-serene-ochre">Export Records</button>
+</div>
+</div>
+<div class="space-y-2">
+<div class="list-row">
+<div class="w-1/4">
+<h3 class="text-white font-medium text-lg">Apex Ventures</h3>
+<p class="text-xs text-serene-muted mt-1 italic">Jordan Smith · Oct 24, 2023</p>
+</div>
+<div class="w-1/6">
+<span class="text-[10px] uppercase tracking-widest text-serene-muted block mb-1">Setup</span>
+<span class="text-serene-text">$12,000</span>
+</div>
+<div class="w-1/6">
+<span class="text-[10px] uppercase tracking-widest text-serene-muted block mb-1">Commissions</span>
+<span class="text-serene-text">$1,200 / $240</span>
+</div>
+<div class="w-1/4 px-4">
+<span class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest text-serene-sage border border-serene-sage/30 px-3 py-1 rounded-full">
+<span class="w-1 h-1 rounded-full bg-serene-sage"></span>
+                        Completed
+                    </span>
+</div>
+<div class="w-1/12 text-right">
+<span class="material-symbols-outlined text-serene-sage">check_circle</span>
+</div>
+</div>
+<div class="list-row">
+<div class="w-1/4">
+<h3 class="text-white font-medium text-lg">Nova Tech</h3>
+<p class="text-xs text-serene-muted mt-1 italic">Sarah Chen · Nov 02, 2023</p>
+</div>
+<div class="w-1/6">
+<span class="text-[10px] uppercase tracking-widest text-serene-muted block mb-1">Setup</span>
+<span class="text-serene-text">$8,500</span>
+</div>
+<div class="w-1/6">
+<span class="text-[10px] uppercase tracking-widest text-serene-muted block mb-1">Commissions</span>
+<span class="text-serene-text">$850 / $170</span>
+</div>
+<div class="w-1/4 px-4">
+<span class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest text-serene-ochre border border-serene-ochre/30 px-3 py-1 rounded-full">
+<span class="w-1 h-1 rounded-full bg-serene-ochre"></span>
+                        In Progress
+                    </span>
+</div>
+<div class="w-1/12 text-right">
+<span class="material-symbols-outlined text-serene-muted">hourglass_bottom</span>
+</div>
+</div>
+<div class="list-row">
+<div class="w-1/4">
+<h3 class="text-white font-medium text-lg">Lunar Systems</h3>
+<p class="text-xs text-serene-muted mt-1 italic">Michael Ross · Nov 14, 2023</p>
+</div>
+<div class="w-1/6">
+<span class="text-[10px] uppercase tracking-widest text-serene-muted block mb-1">Setup</span>
+<span class="text-serene-text">$15,000</span>
+</div>
+<div class="w-1/6">
+<span class="text-[10px] uppercase tracking-widest text-serene-muted block mb-1">Commissions</span>
+<span class="text-serene-text">$1,500 / $300</span>
+</div>
+<div class="w-1/4 px-4">
+<span class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest text-serene-muted border border-serene-border px-3 py-1 rounded-full">
+<span class="w-1 h-1 rounded-full bg-serene-muted"></span>
+                        Pending
+                    </span>
+</div>
+<div class="w-1/12 text-right">
+<span class="material-symbols-outlined text-serene-muted">schedule</span>
+</div>
+</div>
+<div class="list-row border-none">
+<div class="w-1/4">
+<h3 class="text-white font-medium text-lg">Global Dynamics</h3>
+<p class="text-xs text-serene-muted mt-1 italic">Emma Wilson · Nov 18, 2023</p>
+</div>
+<div class="w-1/6">
+<span class="text-[10px] uppercase tracking-widest text-serene-muted block mb-1">Setup</span>
+<span class="text-serene-text">$5,000</span>
+</div>
+<div class="w-1/6">
+<span class="text-[10px] uppercase tracking-widest text-serene-muted block mb-1">Commissions</span>
+<span class="text-serene-text">$500 / $100</span>
+</div>
+<div class="w-1/4 px-4">
+<span class="inline-flex items-center gap-2 text-[10px] uppercase tracking-widest text-serene-sage border border-serene-sage/30 px-3 py-1 rounded-full">
+<span class="w-1 h-1 rounded-full bg-serene-sage"></span>
+                        Completed
+                    </span>
+</div>
+<div class="w-1/12 text-right">
+<span class="material-symbols-outlined text-serene-sage">check_circle</span>
+</div>
+</div>
+</div>
+<div class="mt-16 flex justify-center gap-12">
+<button class="text-[11px] uppercase tracking-widest text-serene-muted hover:text-white transition-colors">← Previous</button>
+<button class="text-[11px] uppercase tracking-widest text-serene-muted hover:text-white transition-colors">Next →</button>
+</div>
+</section>
+<section class="mt-32 pt-24 border-t border-serene-border">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-24">
+<div>
+<h4 class="text-xl font-serif text-white mb-8 italic">Network Path Analysis</h4>
+<div class="flex items-center gap-4 py-8">
+<div class="h-px bg-serene-ochre flex-1"></div>
+<div class="w-3 h-3 rounded-full border border-serene-ochre"></div>
+<div class="h-px bg-serene-border flex-1"></div>
+<div class="w-3 h-3 rounded-full border border-serene-border"></div>
+<div class="h-px bg-serene-border flex-1"></div>
+</div>
+<div class="flex justify-between text-[10px] uppercase tracking-widest text-serene-muted font-medium">
+<span>Master Tier</span>
+<span>L1 Node</span>
+<span>L2 Entry</span>
+</div>
+</div>
+<div>
+<h4 class="text-xl font-serif text-white mb-8 italic">Distribution Breakdown</h4>
+<div class="space-y-6">
+<div class="flex justify-between items-baseline border-b border-serene-border/20 pb-2">
+<span class="text-sm font-light">Primary Tier Commission</span>
+<span class="text-lg font-serif text-serene-sage">$9,200</span>
+</div>
+<div class="flex justify-between items-baseline border-b border-serene-border/20 pb-2">
+<span class="text-sm font-light">Secondary Tier Commission</span>
+<span class="text-lg font-serif text-serene-ochre">$2,300</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+</body></html>

@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background-color: #0f1115;
+  color: #d1d5db;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.heading-serif {
+  font-family: "Playfair Display", serif;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 20;
+}
+
+.list-row {
+  @apply rounded-lg border-b border-serene-border px-4 py-8 transition-colors hover:bg-white/[0.02];
+}
+
+.editorial-label {
+  @apply text-[10px] uppercase tracking-[0.2em] text-serene-sage;
+}
+
+.editorial-button {
+  @apply border border-serene-border px-8 py-3 text-sm uppercase tracking-widest text-serene-text transition-all hover:border-serene-ochre hover:text-serene-ochre;
+}
+
+.editorial-input,
+.editorial-select,
+.editorial-textarea {
+  @apply w-full border border-serene-border bg-serene-slate/40 px-4 py-3 text-sm text-serene-text outline-none transition-colors placeholder:text-serene-muted focus:border-serene-ochre;
+}
+
+.editorial-textarea {
+  @apply min-h-32 resize-y;
+}
+
+.editorial-panel {
+  @apply border border-serene-border bg-serene-slate/20 shadow-serene;
+}

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "@/app/globals.css";
 import { Sidebar } from "@/components/sidebar";
 import { getSession } from "@/lib/auth";
@@ -6,6 +6,11 @@ import { getSession } from "@/lib/auth";
 export const metadata: Metadata = {
   title: "Referral Tracker",
   description: "Luxury referral tracking for OpenClaw AI concierge setups."
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {

@@ -127,7 +127,7 @@ export function ClientManager({ clients, people }: { clients: Client[]; people: 
   return (
     <div className="grid gap-12 xl:grid-cols-[minmax(0,1fr)_420px]">
       <section>
-        <div className="mb-10 flex items-center justify-between">
+        <div className="mb-10 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center md:gap-0">
           <h2 className="heading-serif text-2xl text-white">Client Records</h2>
           <button className="editorial-button" onClick={openCreate} type="button">
             Add New Client
@@ -136,24 +136,24 @@ export function ClientManager({ clients, people }: { clients: Client[]; people: 
         <div className="space-y-2">
           {clients.map((client, index) => (
             <div key={client.id} className={`list-row flex flex-col gap-6 md:flex-row md:items-center ${index === clients.length - 1 ? "border-none" : ""}`}>
-              <div className="md:w-1/4">
+              <div className="w-full md:w-1/4">
                 <h3 className="text-lg font-medium text-white">{client.name}</h3>
                 <p className="mt-1 text-xs italic text-serene-muted">
                   {client.referredByName ?? "Harley"}, {formatDate(client.dateAdded)}
                 </p>
               </div>
-              <div className="md:w-1/6">
+              <div className="w-full md:w-1/6">
                 <span className="mb-1 block text-[10px] uppercase tracking-widest text-serene-muted">Setup Fee</span>
                 <span>{formatCurrency(client.setupFeeCents)}</span>
               </div>
-              <div className="md:w-1/5">
+              <div className="w-full md:w-1/5">
                 <span className="mb-1 block text-[10px] uppercase tracking-widest text-serene-muted">Notes</span>
                 <span className="text-sm text-serene-muted">{client.notes || "No notes."}</span>
               </div>
-              <div className="md:w-1/5">
+              <div className="w-full md:w-1/5">
                 <StatusBadge status={client.status} />
               </div>
-              <div className="flex gap-3 md:ml-auto">
+              <div className="flex w-full gap-3 md:ml-auto md:w-auto">
                 <button className="text-[11px] uppercase tracking-widest text-serene-muted hover:text-serene-ochre" onClick={() => openEdit(client)} type="button">
                   Edit
                 </button>

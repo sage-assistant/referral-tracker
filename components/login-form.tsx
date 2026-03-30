@@ -26,7 +26,7 @@ export function LoginForm() {
         </label>
         <input
           autoComplete="username"
-          className="editorial-input rounded-2xl"
+          className="editorial-input w-full rounded-2xl"
           id="username"
           name="username"
           placeholder="Enter username"
@@ -40,7 +40,7 @@ export function LoginForm() {
         </label>
         <input
           autoComplete="current-password"
-          className="editorial-input rounded-2xl"
+          className="editorial-input w-full rounded-2xl"
           id="password"
           name="password"
           placeholder="Enter password"

@@ -50,7 +50,11 @@ export function ReferrerPortal({
           {stats.map((item, index) => (
             <div
               key={item.label}
-              className={index === 0 ? "flex flex-col gap-2" : "flex flex-col gap-2 border-l border-serene-border/30 pl-8"}
+              className={
+                index === 0
+                  ? "flex flex-col gap-2"
+                  : "flex flex-col gap-2 md:border-l md:border-serene-border/30 md:pl-8"
+              }
             >
               <span className="editorial-label">{item.label}</span>
               <span className="heading-serif text-4xl text-white">{item.value}</span>
@@ -60,7 +64,7 @@ export function ReferrerPortal({
       </section>
 
       <section>
-        <div className="mb-10 flex items-center justify-between">
+        <div className="mb-10 flex flex-col items-start justify-between gap-3 md:flex-row md:items-center md:gap-0">
           <h2 className="heading-serif text-2xl text-white">Referral Ledger</h2>
           <p className="text-[10px] uppercase tracking-widest text-serene-muted">Read Only View</p>
         </div>
@@ -80,23 +84,23 @@ export function ReferrerPortal({
                     index === referrals.length - 1 ? "border-none" : ""
                   }`}
                 >
-                  <div className="md:w-[22%]">
+                  <div className="w-full md:w-[22%]">
                     <h3 className="text-lg font-medium text-white">{referral.clientName}</h3>
                     <p className="mt-1 text-xs italic text-serene-muted">{formatDate(referral.dateAdded)}</p>
                   </div>
-                  <div className="md:w-[14%]">
+                  <div className="w-full md:w-[14%]">
                     <span className="mb-1 block text-[10px] uppercase tracking-widest text-serene-muted">Setup Fee</span>
                     <span className="text-serene-text">{formatCurrency(referral.setupFeeCents)}</span>
                   </div>
-                  <div className="md:w-[10%]">
+                  <div className="w-full md:w-[10%]">
                     <span className="mb-1 block text-[10px] uppercase tracking-widest text-serene-muted">Tier</span>
                     <span className="text-serene-text">L{referral.level}</span>
                   </div>
-                  <div className="md:w-[14%]">
+                  <div className="w-full md:w-[14%]">
                     <span className="mb-1 block text-[10px] uppercase tracking-widest text-serene-muted">Fee Earned</span>
                     <span className="text-serene-text">{formatCurrency(referral.amountCents)}</span>
                   </div>
-                  <div className="md:w-[20%]">
+                  <div className="w-full md:w-[20%]">
                     <span className="mb-1 block text-[10px] uppercase tracking-widest text-serene-muted">Payment Status</span>
                     <span
                       className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[10px] uppercase tracking-widest ${paymentStatus.className}`}
@@ -105,7 +109,7 @@ export function ReferrerPortal({
                       {paymentStatus.label}
                     </span>
                   </div>
-                  <div className="md:ml-auto md:w-[10%]">
+                  <div className="w-full md:ml-auto md:w-[10%]">
                     <span className="mb-1 block text-[10px] uppercase tracking-widest text-serene-muted">Date</span>
                     <span className="text-sm text-serene-text">{formatDate(referral.dateAdded)}</span>
                   </div>

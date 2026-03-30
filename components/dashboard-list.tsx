@@ -14,9 +14,9 @@ export function DashboardList({ clients }: { clients: Client[] }) {
 
   return (
     <section>
-      <div className="mb-10 flex items-center justify-between">
+      <div className="mb-10 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center md:gap-0">
         <h2 className="heading-serif text-2xl text-white">Client Ledger</h2>
-        <div className="flex gap-6 text-[10px] font-bold uppercase tracking-widest text-serene-muted">
+        <div className="flex flex-wrap gap-6 text-[10px] font-bold uppercase tracking-widest text-serene-muted">
           <Link href="/clients" className="hover:text-serene-ochre">
             Manage Clients
           </Link>
@@ -31,17 +31,17 @@ export function DashboardList({ clients }: { clients: Client[] }) {
         ) : (
           previewClients.map((client, index) => (
             <div key={client.id} className={`list-row flex flex-col gap-6 md:flex-row md:items-center ${index === previewClients.length - 1 ? "border-none" : ""}`}>
-              <div className="md:w-1/4">
+              <div className="w-full md:w-1/4">
                 <h3 className="text-lg font-medium text-white">{client.name}</h3>
                 <p className="mt-1 text-xs italic text-serene-muted">
                   {client.referredByName ?? "Direct intake"}, {formatDate(client.dateAdded)}
                 </p>
               </div>
-              <div className="md:w-1/6">
+              <div className="w-full md:w-1/6">
                 <span className="mb-1 block text-[10px] uppercase tracking-widest text-serene-muted">Setup Fee</span>
                 <span className="text-serene-text">{formatCurrency(client.setupFeeCents)}</span>
               </div>
-              <div className="md:w-1/6">
+              <div className="w-full md:w-1/6">
                 <span className="mb-1 block text-[10px] uppercase tracking-widest text-serene-muted">Referral Fees</span>
                 <span className="text-serene-text">
                   {getCommissions(
@@ -51,10 +51,10 @@ export function DashboardList({ clients }: { clients: Client[] }) {
                   )}
                 </span>
               </div>
-              <div className="md:w-1/4 md:px-4">
+              <div className="w-full md:w-1/4 md:px-4">
                 <StatusBadge status={client.status} />
               </div>
-              <div className="text-right md:w-1/12">
+              <div className="w-full text-left md:w-1/12 md:text-right">
                 <span className="material-symbols-outlined text-serene-sage">
                   {client.status === "Completed"
                     ? "check_circle"

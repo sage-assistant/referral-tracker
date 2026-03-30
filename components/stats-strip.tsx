@@ -15,7 +15,11 @@ export function StatsStrip({ stats }: { stats: DashboardStats }) {
         {items.map((item, index) => (
           <div
             key={item.label}
-            className={index === 0 ? "flex flex-col gap-2" : "flex flex-col gap-2 border-l border-serene-border/30 pl-8"}
+            className={
+              index === 0
+                ? "flex flex-col gap-2"
+                : "flex flex-col gap-2 md:border-l md:border-serene-border/30 md:pl-8"
+            }
           >
             <span className="editorial-label">{item.label}</span>
             <span className="heading-serif text-4xl text-white">{item.value}</span>

@@ -11,10 +11,15 @@ body {
   color: #d1d5db;
   font-family: "Plus Jakarta Sans", sans-serif;
   letter-spacing: -0.01em;
+  overflow-x: hidden;
 }
 
 .heading-serif {
   font-family: "Playfair Display", serif;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 .material-symbols-outlined {

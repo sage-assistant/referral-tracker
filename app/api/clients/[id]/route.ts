@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminRequest } from "@/lib/auth";
 import { deleteClient, updateClient } from "@/lib/data";
 import { handleApiError } from "@/lib/api";
 
@@ -10,6 +11,7 @@ type RouteContext = {
 
 export async function PATCH(request: NextRequest, { params }: RouteContext) {
   try {
+    await requireAdminRequest(request);
     if (Number.isNaN(Number(params.id))) {
       return NextResponse.json({ error: "Client id is invalid." }, { status: 400 });
     }
@@ -23,6 +25,7 @@ export async function PATCH(request: NextRequest, { params }: RouteContext) {
 
 export async function DELETE(_: NextRequest, { params }: RouteContext) {
   try {
+    await requireAdminRequest(_);
     if (Number.isNaN(Number(params.id))) {
       return NextResponse.json({ error: "Client id is invalid." }, { status: 400 });
     }

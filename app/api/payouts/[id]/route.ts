@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { requireAdminRequest } from "@/lib/auth";
 import { setPayoutPaid } from "@/lib/data";
 import { handleApiError } from "@/lib/api";
 
@@ -10,6 +11,7 @@ type RouteContext = {
 
 export async function PATCH(request: NextRequest, { params }: RouteContext) {
   try {
+    await requireAdminRequest(request);
     if (Number.isNaN(Number(params.id))) {
       return NextResponse.json({ error: "Payout id is invalid." }, { status: 400 });
     }

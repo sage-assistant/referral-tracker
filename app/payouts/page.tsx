@@ -1,8 +1,11 @@
 import { PayoutTracker } from "@/components/payout-tracker";
 import { Shell } from "@/components/shell";
+import { requireAdmin } from "@/lib/auth";
 import { getPayouts } from "@/lib/data";
 
-export default function PayoutsPage() {
+export default async function PayoutsPage() {
+  await requireAdmin();
+
   return (
     <Shell
       title="Payout Tracker"

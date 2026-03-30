@@ -1,8 +1,11 @@
 import { ClientManager } from "@/components/client-manager";
 import { Shell } from "@/components/shell";
+import { requireAdmin } from "@/lib/auth";
 import { getClients, getPeople } from "@/lib/data";
 
-export default function ClientsPage() {
+export default async function ClientsPage() {
+  await requireAdmin();
+
   return (
     <Shell
       title="Client Records"

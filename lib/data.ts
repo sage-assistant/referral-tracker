@@ -8,6 +8,8 @@ import {
   DashboardStats,
   Payout,
   Person,
+  ReferrerReferral,
+  ReferrerSummary,
   TreeNode
 } from "@/lib/types";
 
@@ -129,6 +131,16 @@ function getPersonById(personId: number) {
        WHERE id = ?`
     )
     .get(personId) as Person | undefined;
+}
+
+function getPersonByName(name: string) {
+  return db
+    .prepare(
+      `SELECT id, name, referred_by_person_id AS referredByPersonId, notes, created_at AS createdAt
+       FROM people
+       WHERE LOWER(name) = LOWER(?)`
+    )
+    .get(name) as Person | undefined;
 }
 
 function getClientById(clientId: number) {
@@ -298,6 +310,46 @@ export function getPayouts() {
        ORDER BY p.paid_at IS NOT NULL ASC, date(c.date_added) DESC, p.level ASC`
     )
     .all() as Payout[];
+}
+
+export function getReferrerReferrals(referrerName: string) {
+  const referrer = getPersonByName(referrerName);
+
+  if (!referrer) {
+    return [] as ReferrerReferral[];
+  }
+
+  return db
+    .prepare(
+      `SELECT p.id AS payoutId, c.id AS clientId, person.name AS clientName, c.setup_fee_cents AS setupFeeCents,
+              p.level, p.amount_cents AS amountCents, p.paid_at AS paidAt, c.status AS clientStatus,
+              c.date_added AS dateAdded
+       FROM payouts p
+       INNER JOIN clients c ON c.id = p.client_id
+       INNER JOIN people person ON person.id = c.person_id
+       WHERE p.recipient_person_id = ?
+       ORDER BY date(c.date_added) DESC, p.level ASC, c.id DESC`
+    )
+    .all(referrer.id) as ReferrerReferral[];
+}
+
+export function getReferrerSummary(referrerName: string): ReferrerSummary {
+  const referrals = getReferrerReferrals(referrerName);
+
+  return referrals.reduce<ReferrerSummary>(
+    (summary, referral) => ({
+      totalClients: summary.totalClients + 1,
+      totalFeesEarnedCents: summary.totalFeesEarnedCents + referral.amountCents,
+      totalPaidOutCents: summary.totalPaidOutCents + (referral.paidAt ? referral.amountCents : 0),
+      totalUnpaidCents: summary.totalUnpaidCents + (referral.paidAt ? 0 : referral.amountCents)
+    }),
+    {
+      totalClients: 0,
+      totalFeesEarnedCents: 0,
+      totalPaidOutCents: 0,
+      totalUnpaidCents: 0
+    }
+  );
 }
 
 export function getTree() {

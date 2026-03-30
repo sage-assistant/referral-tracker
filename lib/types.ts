@@ -43,6 +43,25 @@ export type DashboardStats = {
   totalPaidCents: number;
 };
 
+export type ReferrerReferral = {
+  payoutId: number;
+  clientId: number;
+  clientName: string;
+  setupFeeCents: number;
+  level: 1 | 2;
+  amountCents: number;
+  paidAt: string | null;
+  clientStatus: ClientStatus;
+  dateAdded: string;
+};
+
+export type ReferrerSummary = {
+  totalClients: number;
+  totalFeesEarnedCents: number;
+  totalPaidOutCents: number;
+  totalUnpaidCents: number;
+};
+
 export type TreeNode = {
   id: number;
   name: string;

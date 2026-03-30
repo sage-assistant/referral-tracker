@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
 import { Sidebar } from "@/components/sidebar";
+import { getSession } from "@/lib/auth";
 
 export const metadata: Metadata = {
   title: "Referral Tracker",
   description: "Luxury referral tracking for OpenClaw AI concierge setups."
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const session = await getSession();
+
   return (
     <html lang="en" className="dark">
       <head>
@@ -30,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="antialiased">
-        <Sidebar />
+        <Sidebar session={session} />
         {children}
       </body>
     </html>

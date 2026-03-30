@@ -1,8 +1,11 @@
 import { ReferralTree } from "@/components/referral-tree";
 import { Shell } from "@/components/shell";
+import { requireAdmin } from "@/lib/auth";
 import { getTree } from "@/lib/data";
 
-export default function TreePage() {
+export default async function TreePage() {
+  await requireAdmin();
+
   return (
     <Shell
       title="Referral Tree"

@@ -3,13 +3,19 @@ import { ReferrerPortal } from "@/components/referrer-portal";
 import { Shell } from "@/components/shell";
 import { StatsStrip } from "@/components/stats-strip";
 import { requireSession } from "@/lib/auth";
-import { getClients, getDashboardStats, getReferrerReferrals, getReferrerSummary } from "@/lib/data";
+import { getClients, getDashboardStats, getReferrerProspects, getReferrerReferrals, getReferrerSummary } from "@/lib/data";
 
 export default async function DashboardPage() {
   const session = await requireSession();
 
   if (session.role === "referrer") {
-    return <ReferrerPortal referrals={getReferrerReferrals("Harley")} summary={getReferrerSummary("Harley")} />;
+    return (
+      <ReferrerPortal
+        prospects={getReferrerProspects(session.username)}
+        referrals={getReferrerReferrals(session.username)}
+        summary={getReferrerSummary(session.username)}
+      />
+    );
   }
 
   const stats = getDashboardStats();

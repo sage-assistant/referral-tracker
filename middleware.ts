@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { decodeSession, SESSION_COOKIE_NAME } from "@/lib/session";
 
-const adminOnlyPrefixes = ["/clients", "/payouts", "/tree", "/api/clients", "/api/payouts"];
+const adminOnlyPrefixes = ["/clients", "/payouts", "/prospects", "/tree", "/api/clients", "/api/payouts"];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;

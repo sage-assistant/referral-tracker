@@ -61,4 +61,18 @@ export async function requireAdminRequest(request: NextRequest) {
   return session;
 }
 
+export async function requireReferrerRequest(request: NextRequest) {
+  const session = await decodeSession(request.cookies.get(SESSION_COOKIE_NAME)?.value);
+
+  if (!session) {
+    throw new AppError("Authentication required.", 401);
+  }
+
+  if (session.role !== "referrer") {
+    throw new AppError("Referrer access required.", 403);
+  }
+
+  return session;
+}
+
 export { authenticate };

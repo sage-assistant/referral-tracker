@@ -1,6 +1,7 @@
 import { Shell } from "@/components/shell";
 import { formatCurrency, formatDate } from "@/lib/format";
-import { ReferrerReferral, ReferrerSummary } from "@/lib/types";
+import { Prospect, ReferrerReferral, ReferrerSummary } from "@/lib/types";
+import { ProspectForm } from "@/components/prospect-form";
 
 function getPaymentStatus(referral: ReferrerReferral) {
   if (referral.paidAt) {
@@ -27,9 +28,11 @@ function getPaymentStatus(referral: ReferrerReferral) {
 }
 
 export function ReferrerPortal({
+  prospects,
   referrals,
   summary
 }: {
+  prospects: Prospect[];
   referrals: ReferrerReferral[];
   summary: ReferrerSummary;
 }) {
@@ -60,6 +63,29 @@ export function ReferrerPortal({
               <span className="heading-serif text-4xl text-white">{item.value}</span>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="mb-24">
+        <div className="editorial-panel p-8 md:p-10">
+          <div className="mb-6">
+            <h2 className="heading-serif text-2xl italic text-white">Referral Agreement</h2>
+          </div>
+          <div className="space-y-4 text-sm leading-7 text-serene-muted">
+            <p>
+              <span className="text-serene-text">Level 1 Referral (Direct)</span>, you earn 20% of the
+              setup fee for any client you refer directly.
+            </p>
+            <p>
+              <span className="text-serene-text">Level 2 Referral (Indirect)</span>, you earn 10% of the
+              setup fee when one of your referred clients brings in a new client.
+            </p>
+            <p>Payouts are processed once a client setup is marked as Completed.</p>
+            <p>
+              Each client may have a different setup fee. Your commission is calculated on the actual fee
+              charged.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -119,6 +145,8 @@ export function ReferrerPortal({
           )}
         </div>
       </section>
+
+      <ProspectForm prospects={prospects} />
     </Shell>
   );
 }

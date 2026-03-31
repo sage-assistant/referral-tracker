@@ -8,6 +8,8 @@ import {
   DashboardStats,
   Payout,
   Person,
+  Prospect,
+  ProspectStatus,
   ReferrerReferral,
   ReferrerSummary,
   TreeNode
@@ -15,6 +17,7 @@ import {
 
 const DEFAULT_FEE_CENTS = 575000;
 const VALID_STATUSES: ClientStatus[] = ["Pending", "In Progress", "Completed"];
+const VALID_PROSPECT_STATUSES: ProspectStatus[] = ["New", "Contacted", "Converted", "Declined"];
 
 function nowIso() {
   return new Date().toISOString();
@@ -48,6 +51,15 @@ function normalizeNotes(value: unknown) {
   return value.trim();
 }
 
+function normalizeOptionalText(value: unknown) {
+  if (typeof value !== "string") {
+    return null;
+  }
+
+  const trimmed = value.trim();
+  return trimmed ? trimmed : null;
+}
+
 function normalizeFee(value: unknown) {
   const parsed = Number(value);
 
@@ -64,6 +76,14 @@ function normalizeDate(value: unknown) {
   }
 
   return value;
+}
+
+function toProspectStatus(value: unknown): ProspectStatus {
+  if (typeof value !== "string" || !VALID_PROSPECT_STATUSES.includes(value as ProspectStatus)) {
+    throw new AppError("Prospect status is invalid.");
+  }
+
+  return value as ProspectStatus;
 }
 
 export function initializeDatabase() {
@@ -97,6 +117,17 @@ export function initializeDatabase() {
       created_at TEXT NOT NULL,
       updated_at TEXT NOT NULL,
       UNIQUE(client_id, recipient_person_id, level)
+    );
+
+    CREATE TABLE IF NOT EXISTS prospects (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      email TEXT,
+      phone TEXT,
+      notes TEXT,
+      submitted_by_person_id INTEGER NOT NULL REFERENCES people(id) ON DELETE CASCADE,
+      status TEXT NOT NULL DEFAULT 'New' CHECK (status IN ('New', 'Contacted', 'Converted', 'Declined')),
+      created_at TEXT NOT NULL
     );
   `);
 
@@ -350,6 +381,98 @@ export function getReferrerSummary(referrerName: string): ReferrerSummary {
       totalUnpaidCents: 0
     }
   );
+}
+
+export function getProspects(submittedByPersonId?: number) {
+  const baseQuery = `SELECT p.id, p.name, p.email, p.phone, p.notes,
+                            p.submitted_by_person_id AS submittedByPersonId,
+                            submitter.name AS submittedByName,
+                            p.status, p.created_at AS createdAt
+                     FROM prospects p
+                     INNER JOIN people submitter ON submitter.id = p.submitted_by_person_id`;
+
+  const query =
+    submittedByPersonId === undefined
+      ? `${baseQuery} ORDER BY datetime(p.created_at) DESC, p.id DESC`
+      : `${baseQuery} WHERE p.submitted_by_person_id = ? ORDER BY datetime(p.created_at) DESC, p.id DESC`;
+
+  const statement = db.prepare(query);
+  return (
+    submittedByPersonId === undefined ? statement.all() : statement.all(submittedByPersonId)
+  ) as Prospect[];
+}
+
+export function getReferrerProspects(referrerName: string) {
+  const referrer = getPersonByName(referrerName);
+
+  if (!referrer) {
+    return [] as Prospect[];
+  }
+
+  return getProspects(referrer.id);
+}
+
+type ProspectInput = {
+  name: unknown;
+  email: unknown;
+  phone: unknown;
+  notes: unknown;
+};
+
+function parseProspectInput(input: ProspectInput) {
+  return {
+    name: normalizeName(input.name, "Prospect name"),
+    email: normalizeOptionalText(input.email),
+    phone: normalizeOptionalText(input.phone),
+    notes: normalizeOptionalText(input.notes)
+  };
+}
+
+export function createProspect(submittedByName: string, input: ProspectInput) {
+  const submitter = getPersonByName(submittedByName);
+
+  if (!submitter) {
+    throw new AppError("Submitting referrer was not found.", 404);
+  }
+
+  const parsed = parseProspectInput(input);
+  const createdAt = nowIso();
+
+  const result = db
+    .prepare(
+      `INSERT INTO prospects (name, email, phone, notes, submitted_by_person_id, status, created_at)
+       VALUES (?, ?, ?, ?, ?, 'New', ?)`
+    )
+    .run(parsed.name, parsed.email, parsed.phone, parsed.notes, submitter.id, createdAt);
+
+  const prospect = db
+    .prepare(
+      `SELECT p.id, p.name, p.email, p.phone, p.notes,
+              p.submitted_by_person_id AS submittedByPersonId,
+              submitter.name AS submittedByName,
+              p.status, p.created_at AS createdAt
+       FROM prospects p
+       INNER JOIN people submitter ON submitter.id = p.submitted_by_person_id
+       WHERE p.id = ?`
+    )
+    .get(Number(result.lastInsertRowid)) as Prospect | undefined;
+
+  if (!prospect) {
+    throw new AppError("Prospect could not be loaded after creation.", 500);
+  }
+
+  return prospect;
+}
+
+export function updateProspectStatus(prospectId: number, status: unknown) {
+  const parsedStatus = toProspectStatus(status);
+  const prospect = db.prepare("SELECT id FROM prospects WHERE id = ?").get(prospectId) as { id: number } | undefined;
+
+  if (!prospect) {
+    throw new AppError("Prospect not found.", 404);
+  }
+
+  db.prepare("UPDATE prospects SET status = ? WHERE id = ?").run(parsedStatus, prospectId);
 }
 
 export function getTree() {

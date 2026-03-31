@@ -9,6 +9,7 @@ const adminNavItems = [
   { href: "/", icon: "grid_view", label: "Dashboard" },
   { href: "/clients", icon: "contacts", label: "Clients" },
   { href: "/payouts", icon: "account_balance", label: "Payouts" },
+  { href: "/prospects", icon: "person_add", label: "Prospects" },
   { href: "/tree", icon: "device_hub", label: "Referral Tree" }
 ];
 

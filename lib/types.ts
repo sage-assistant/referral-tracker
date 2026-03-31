@@ -1,4 +1,5 @@
 export type ClientStatus = "Pending" | "In Progress" | "Completed";
+export type ProspectStatus = "New" | "Contacted" | "Converted" | "Declined";
 
 export type Person = {
   id: number;
@@ -60,6 +61,18 @@ export type ReferrerSummary = {
   totalFeesEarnedCents: number;
   totalPaidOutCents: number;
   totalUnpaidCents: number;
+};
+
+export type Prospect = {
+  id: number;
+  name: string;
+  email: string | null;
+  phone: string | null;
+  notes: string | null;
+  submittedByPersonId: number;
+  submittedByName: string;
+  status: ProspectStatus;
+  createdAt: string;
 };
 
 export type TreeNode = {

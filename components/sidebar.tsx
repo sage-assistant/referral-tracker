@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { Session } from "@/lib/auth-shared";
+import { BrandWordmark } from "@/components/brand-wordmark";
 
 const adminNavItems = [
   { href: "/", icon: "grid_view", label: "Dashboard" },
@@ -27,10 +28,11 @@ export function Sidebar({ session }: { session: Session | null }) {
   return (
     <>
       <aside className="fixed left-0 top-0 z-50 hidden h-full w-20 flex-col items-center border-r border-serene-border py-10 md:flex">
-        <div className="mb-12">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-serene-ochre">
-            <span className="heading-serif text-xl italic text-serene-ochre">H</span>
-          </div>
+        <div className="mb-12 flex min-h-28 items-center justify-center">
+          <BrandWordmark
+            stacked
+            className="text-[10px]"
+          />
         </div>
         <nav className="flex flex-col gap-10">
           {navItems.map((item) => {

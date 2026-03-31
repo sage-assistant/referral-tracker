@@ -4,8 +4,8 @@ import { Sidebar } from "@/components/sidebar";
 import { getSession } from "@/lib/auth";
 
 export const metadata: Metadata = {
-  title: "Referral Tracker",
-  description: "Luxury referral tracking for OpenClaw AI concierge setups."
+  title: "Silicon Grip | Referral Tracker",
+  description: "Premium referral tracking for Silicon Grip client partnerships."
 };
 
 export const viewport: Viewport = {

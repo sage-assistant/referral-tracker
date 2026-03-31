@@ -24,7 +24,7 @@ export default async function DashboardPage() {
   return (
     <Shell
       title="Referral Performance"
-      description="A refined record of Harley's OpenClaw AI concierge network, capturing client growth, fee flow, and payout readiness."
+      description="A refined record of Harley's Silicon Grip referral network, capturing client growth, fee flow, and payout readiness."
     >
       <StatsStrip stats={stats} />
       <DashboardList clients={clients} />

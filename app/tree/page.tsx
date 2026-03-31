@@ -9,7 +9,7 @@ export default async function TreePage() {
   return (
     <Shell
       title="Referral Tree"
-      description="Trace how Harley's network expands, from the root referral source through each active client node."
+      description="Trace how Harley's Silicon Grip network expands, from the root referral source through each active client node."
     >
       <ReferralTree roots={getTree()} />
     </Shell>

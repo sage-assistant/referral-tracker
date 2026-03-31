@@ -46,7 +46,7 @@ export function ReferrerPortal({
   return (
     <Shell
       title="Referral Overview"
-      description="A private view of Harley's referrals, earned fees, and payment activity."
+      description="A private view of Harley's Silicon Grip referrals, earned fees, and payment activity."
     >
       <section className="mb-24 border-y border-serene-border py-10">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
